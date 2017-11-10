@@ -47,6 +47,8 @@ def textDocument_didClose(*args):
 def textDocument_hover(*args):
     return lc.textDocument_hover(args)
 
+def textDocument_silent_hover(*args):
+    return lc.textDocument_silent_hover(args)
 
 def textDocument_definition(*args):
     return lc.textDocument_definition(args)

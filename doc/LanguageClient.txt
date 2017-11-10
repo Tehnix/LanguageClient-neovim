@@ -190,17 +190,23 @@ Stop current language server.
 
 Show type info (and short doc) of identifier under cursor.
 
-4.2 LanguageClient_textDocument_definition()
+4.2 LanguageClient_textDocument_silent_hover()
+*LanguageClient_textDocument_silent_hover*
+
+Return a string with the type info (and short doc) of identifier under 
+cursor.
+
+4.3 LanguageClient_textDocument_definition()
 *LanguageClient_textDocument_definition*
 
 Goto definition of identifier under cursor.
 
-4.3 LanguageClient_textDocument_rename()
+4.4 LanguageClient_textDocument_rename()
 *LanguageClient_textDocument_rename*
 
 Rename identifier under cursor.
 
-4.4 LanguageClient_textDocument_documentSymbol()
+4.5 LanguageClient_textDocument_documentSymbol()
 *LanguageClient_textDocument_documentSymbol*
 
 List of current buffer's symbols.
@@ -210,7 +216,7 @@ prompt, selecting one of the symbol will then goto the symbol's definition.
 
 For Denite users, a source with name 'documentSymbol' is provided.
 
-4.5 LanguageClient_textDocument_references()
+4.6 LanguageClient_textDocument_references()
 *LanguageClient_textDocument_references*
 
 List all references of identifier under cursor.
@@ -220,7 +226,7 @@ prompt, selecting one of the entry will then goto the reference location.
 
 For Denite users, a source with name 'references' is provided.
 
-4.6 LanguageClient_workspace_symbol()
+4.7 LanguageClient_workspace_symbol()
 *LanguageClient_workspace_symbol*
 
 List of project's symbols.
@@ -230,7 +236,7 @@ prompt, selecting one of the symbol will then goto the symbol's definition.
 
 For Denite users, a source with name 'workspaceSymbol' is provided.
 
-4.7 LanguageClient_textDocument_completion()
+4.8 LanguageClient_textDocument_completion()
 *LanguageClient_textDocument_completion*
 
 Get a list of completion items at current editing location. Note, this is an
@@ -239,7 +245,7 @@ synchronous call.
 When using a supported completion manager (deoplete and
 nvim-completion-manager are supported), completion should work out of the box.
 
-4.8 LanguageClient_setLoggingLevel(level: str)
+4.9 LanguageClient_setLoggingLevel(level: str)
 *LanguageClient_setLoggingLevel*
 
 Set the plugin logging level. By default, only errors are logged into
@@ -247,17 +253,17 @@ Set the plugin logging level. By default, only errors are logged into
 
 Valid logging levels are 'ERROR'(default), 'INFO', 'DEBUG'.
 
-4.9 LanguageClient_textDocument_formatting()
+4.10 LanguageClient_textDocument_formatting()
 *LanguageClient_textDocument_formatting*
 
 Format current document.
 
-4.10 LanguageClient_textDocument_rangeFormatting()
+4.11 LanguageClient_textDocument_rangeFormatting()
 *LanguageClient_textDocument_rangeFormatting*
 
 Format selected lines.
 
-4.11 LanguageClient_notify(method: str, params: Dict)
+4.12 LanguageClient_notify(method: str, params: Dict)
 *LanguageClient_notify*
 
 Send a notification to the current language server.

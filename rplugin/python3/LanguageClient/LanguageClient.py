@@ -533,10 +533,10 @@ class LanguageClient:
 
         set_state([uri, "textDocument"], None)
 
-    @neovim.function("LanguageClient_textDocument_hover")
+    @neovim.function("LanguageClient_textDocument_silent_hover")
     @deco_args
-    def textDocument_hover(self, uri: str, languageId: str,
-                           line: int, character: int, handle=True) -> Dict:
+    def textDocument_silent_hover(self, uri: str, languageId: str,
+                           line: int, character: int, handle=True) -> str:
         logger.info("Begin textDocument/hover")
 
         self.textDocument_didChange()
@@ -562,9 +562,18 @@ class LanguageClient:
             info = str.join("\n", [markedString_to_str(s) for s in contents])
         else:
             info = markedString_to_str(contents)
-        echo(info)
 
         logger.info("End textDocument/hover")
+        return info
+
+    @neovim.function("LanguageClient_textDocument_hover")
+    @deco_args
+    def textDocument_hover(self, uri: str, languageId: str,
+                           line: int, character: int, handle=True) -> Dict:
+        info = textDocument_silent_hover(uri, languageId, line, character, handle)
+
+        echo(info)
+        
         return result
 
     @neovim.function("LanguageClient_textDocument_definition")

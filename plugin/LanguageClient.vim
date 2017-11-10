@@ -57,6 +57,10 @@ function! LanguageClient_textDocument_hover()
     return s:lc.call('textDocument_hover')
 endfunction
 
+function! LanguageClient_textDocument_silent_hover()
+    return s:lc.call('textDocument_silent_hover')
+endfunction
+
 function! LanguageClient_textDocument_definition()
     return s:lc.call('textDocument_definition')
 endfunction
