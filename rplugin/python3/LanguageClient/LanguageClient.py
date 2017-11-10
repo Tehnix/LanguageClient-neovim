@@ -537,6 +537,39 @@ class LanguageClient:
     @deco_args
     def textDocument_silent_hover(self, uri: str, languageId: str,
                            line: int, character: int, handle=True) -> str:
+        logger.info("Begin textDocument/silent_hover")
+
+        self.textDocument_didChange()
+
+        result = state["rpcs"][languageId].call("textDocument/hover", {
+            "textDocument": {
+                "uri": uri
+            },
+            "position": {
+                "line": line,
+                "character": character
+            }
+        })
+
+        if result is None or not handle:
+            return ""
+
+        contents = result.get("contents")
+        if contents is None:
+            contents = "No info."
+
+        if isinstance(contents, list):
+            info = str.join("\n", [markedString_to_str(s) for s in contents])
+        else:
+            info = markedString_to_str(contents)
+
+        logger.info("End textDocument/silent_hover")
+        return info
+
+    @neovim.function("LanguageClient_textDocument_hover")
+    @deco_args
+    def textDocument_hover(self, uri: str, languageId: str,
+                           line: int, character: int, handle=True) -> Dict:
         logger.info("Begin textDocument/hover")
 
         self.textDocument_didChange()
@@ -565,16 +598,6 @@ class LanguageClient:
 
         logger.info("End textDocument/hover")
         return info
-
-    @neovim.function("LanguageClient_textDocument_hover")
-    @deco_args
-    def textDocument_hover(self, uri: str, languageId: str,
-                           line: int, character: int, handle=True) -> Dict:
-        info = textDocument_silent_hover(uri, languageId, line, character, handle)
-
-        echo(info)
-        
-        return result
 
     @neovim.function("LanguageClient_textDocument_definition")
     @deco_args
