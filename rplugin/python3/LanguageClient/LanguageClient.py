@@ -564,7 +564,7 @@ class LanguageClient:
             info = markedString_to_str(contents)
 
         logger.info("End textDocument/silent_hover")
-        return info
+        return contents
 
     @neovim.function("LanguageClient_textDocument_hover")
     @deco_args
@@ -595,9 +595,10 @@ class LanguageClient:
             info = str.join("\n", [markedString_to_str(s) for s in contents])
         else:
             info = markedString_to_str(contents)
+        echo(info)
 
         logger.info("End textDocument/hover")
-        return info
+        return result
 
     @neovim.function("LanguageClient_textDocument_definition")
     @deco_args
